@@ -1,26 +1,34 @@
+#
+# Ожидаем ввод первого числа и проверяем, что введено именно число
 dig1 = input("Первое число:")
 
 if dig1.isdigit() == True:
     dig1 = int(dig1)
-else: print('Это не число', stop)
-
+else: print('Это не число'), exit()
+#
+# Ожидаем выбор математической операции. Проверяем, что выбрали одну из предложенных....
 operations=str(input("Выберите одну из операций: (+  -  *  /)\n"))
-#else:
-#    print("Ввод должен быть числом")
+if operations == "+" or operations == "-" or operations == "*" or operations == "/":
+#
+#... И ожидаем ввод второго числа
+    dig2=input("Второе число:")
 
-dig2=int(input("Второе число:"))
+else: print("Неверный выбор"), exit()
+
+if dig2.isdigit() == True:
+    dig2 = int(dig2)
+else: print('Это не число'), exit()
+#
+#
 
 if operations == "+":
-    result = dig1 + dig2
+    print (dig1, "+",dig2, "=", dig1+dig2)
 elif operations == "-":
-    result = dig1 - dig2
+    print (dig1, "-",dig2, "=", dig1-dig2)
 elif operations=="*":
-    result = dig1 * dig2
-elif operations=="*":
-    result = dig1 * dig2
-else: print("Неверный выбор")
+    print (dig1, "*",dig2, "=", dig1*dig2)
+elif operations=="/":
+    print (dig1, "/",dig2, "=", dig1/dig2)
 
-print("Результат операции:", result)
-
-
+else: print("Неверный выбор"), exit()
 

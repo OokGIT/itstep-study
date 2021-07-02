@@ -1,27 +1,28 @@
-#
-# Ожидаем ввод первого числа и проверяем, что введено именно число
-
-dig1 = input("Первое число:")
-print(dig1.isdigit())
-if True:
-     dig1 = int(dig1)
-else:
-    print('Это не число')
+# Ожидаем выбор математической операции. Проверяем, что выбрали одну из предложенных.
+operations=str(input("Выберите одну из математических операций: (+  -  *  /)\n"))
+if operations != "+" and operations != "-" and operations != "*" and operations != "/":
+    print ("Выбрана неверная математическая операция")
     exit()
 
-# Ожидаем выбор математической операции. Проверяем, что выбрали одну из предложенных... И ожидаем ввод второго числа
-operations=str(input("Выберите одну из операций: (+  -  *  /)\n"))
-if operations == "+" or operations == "-" or operations == "*" or operations == "/":
-     dig2 = input("Второе число:")
-     print(dig2.isdigit())
-     if True:
-          dig2 = int(dig2)
-     else:
-          print('Это не число')
-          exit()
+# Ожидаем ввод первого числа и проверяем, что введено именно число
+dig1 = input("Первое число:")
+if dig1.isdigit() == True:
+    dig1 = int(dig1)
+#    print (dig1)
+else:
+    print ('введено не число')
+    exit()
 
-else: print("Неверный выбор"), exit()
+# Ожидаем ввод второго числа и проверяем, что введено именно число
+dig2 = input("Второе число:")
+if dig2.isdigit() == True:
+    dig2 = int(dig2)
+#    print (dig2)
+else:
+    print('введено не число')
+    exit()
 
+# Проводим математические операции с двумя числами
 if operations == "+":
     print (dig1, "+",dig2, "=", dig1+dig2)
 elif operations == "-":
@@ -30,37 +31,3 @@ elif operations=="*":
     print (dig1, "*",dig2, "=", dig1*dig2)
 elif operations=="/":
     print (dig1, "/",dig2, "=", dig1/dig2)
-
-else: print("Неверный выбор"), exit()
-
-# if dig1.isdigit() == True:
-# else:
-#     print('Это не число')
-#     exit()
-# #
-# # Ожидаем выбор математической операции. Проверяем, что выбрали одну из предложенных....
-# operations=str(input("Выберите одну из операций: (+  -  *  /)\n"))
-# if operations == "+" or operations == "-" or operations == "*" or operations == "/":
-# #
-# #... И ожидаем ввод второго числа
-#     dig2=input("Второе число:")
-#
-# else: print("Неверный выбор"), exit()
-#
-# if dig2.isdigit() == True:
-#     dig2 = int(dig2)
-# else: print('Это не число'), exit()
-# #
-# #
-#
-# if operations == "+":
-#     print (dig1, "+",dig2, "=", dig1+dig2)
-# elif operations == "-":
-#     print (dig1, "-",dig2, "=", dig1-dig2)
-# elif operations=="*":
-#     print (dig1, "*",dig2, "=", dig1*dig2)
-# elif operations=="/":
-#     print (dig1, "/",dig2, "=", dig1/dig2)
-#
-# else: print("Неверный выбор"), exit()
-#

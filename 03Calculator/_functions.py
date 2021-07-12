@@ -19,7 +19,7 @@ def numeric_inp1():
 # Возврат выбора математической операции
 def calc_operator():
     result_calc = input("введите +-*/")
-    if result_calc != "+" and result_calc != "-" and result_calc != "*" and result_calc != "/" and result_calc != "exit" and result_calc != "clean":
+    if result_calc != "+" and result_calc != "-" and result_calc != "*" and result_calc != "/" and result_calc.lower() != "exit" and result_calc.lower() != "clean":
         print("не тот знак")
         return False
     elif result_calc == "+":
@@ -30,7 +30,7 @@ def calc_operator():
         return "multi"
     elif result_calc == "/":
         return "div"
-    elif result_calc == "exit":
+    elif result_calc.lower() == "exit":
         return "exit"
-    elif result_calc == "clean":
+    elif result_calc.lower() == "clean":
         return "clean"

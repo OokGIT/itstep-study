@@ -1,56 +1,33 @@
-# Ввод числа или результат от предыдущих операций
-# Оператор мат.функции
+# импортируем функции
+# externalCommands в общем-то не используется. Это сидит внутри calc_operator
+# Хотел в отдельной функции, но как вызвать и при вводе числа и при вводе оператора - пока не пришло в голову...
+from _functions import externalCommands, calc_operator, numeric_inp1
 
-# если "=", то посчитать
+# Требуем ввести первое число и, вызывая функцию calc_operator, производим операции над числами, по ходу требуя ввечти ещё число...
 
-# если +-*/ то ожидаем 2 число
+chislo=numeric_inp1()
 
-# def into_float():
-#     try:
-#         user_input = input('Ввод:')
-#         res = float(user_input)
-# #        print(res)
-#     except ZeroDivisionError as err:
-#         print("На ноль делить нельзя", err)
-#     except ValueError as err:
-#         print("Это не похоже на число...", err)
-#     except:
-#         return None
-#
-# num = into_float()
-# print (num)
-def externalCommands():
-    result = input("ждем команду exit или clear")
-    if result.lower() == "exit":
-        result = "exit"
-    elif result.lower() == "clean":
-        result = "clean"
-
-def numeric_inp1():
-    try:
-        result = float(input('Введите число... '))
-        return result
-    except ValueError as err:
-        print("Это не похоже на число...", err)
-    except:
-        return None
-
-def numeric_inp2():
-    try:
-        result = float(input('Введите число... '))
-        return result
-    except ZeroDivisionError as err:
-        print("На ноль делить нельзя", err)
-    except ValueError as err:
-        print("Это не похоже на число...", err)
-    except:
-        return None
-
-
-# Если пользователь начинает ввод с мат.функции, то считаем, что первое число = 0
-
-
-dig1=numeric_inp1()
-operator=operators_inp()
-dig2=
-try
+while True:
+    operator = calc_operator()
+    if operator == "add":
+        chislo += numeric_inp1()
+        print(chislo)
+    elif operator == "minus":
+        chislo -= numeric_inp1()
+        print(chislo)
+    elif operator == "multi":
+        chislo *= numeric_inp1()
+        print(chislo)
+    elif operator == "div":
+        try:
+            chislo /= numeric_inp1()
+        except ZeroDivisionError as e:
+            print("На 0 делить нельзя -", e)
+        print(chislo)
+    elif operator == "exit":
+        print("Спасибо! До новых встреч!..")
+        exit()
+    elif operator == "clean":
+        print ("Память калькулятора очищена")
+        chislo = numeric_inp1()
+        print(chislo)

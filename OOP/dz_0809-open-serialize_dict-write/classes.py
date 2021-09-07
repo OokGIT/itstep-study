@@ -1,32 +1,20 @@
-import json
-
+# import json
 
 class OpenAndSerialize:
 
     def __init__(self, file_name):
         self.file_name = file_name
 
-    def serialize(self):
-        if self.read_file() is True:
-            print("serialize:", self.read_file())
-        return self.read_file()
+    def serialize(self, value):
+        if type(self.value) == dict:
+            self.value = str(self.value)
+            return value
+        elif type(self.value) == str:
+            self.value = eval(self.value)
+            return value
 
-    # def __str__(self):
-    #     return "output_file.one"
-
-    def read_file(self):
+    def read_file(self, file_name):
         file = open(self.file_name, 'r')
-        contents = file.read()
+        contents = self.serialize(file_name)
+        return contents
         file.close()
-        # print(type(contents))
-        if type(contents) == dict:
-            # print(contents)
-            return contents
-        elif type(contents) == str:
-            dictionary = eval(contents)
-            # print(dictionary)
-            return dictionary
-        else:
-            return None
-
-

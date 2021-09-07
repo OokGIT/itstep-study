@@ -43,6 +43,8 @@ class ExtraSerializeGetName(OpenAndSerialize):
     def serialize(self, value):
         if type(value) == str:
             value = eval(value)
+        if type(value) == dict:
+            value = str(value)
         print("Сериализатор2:", value)
         return value
 

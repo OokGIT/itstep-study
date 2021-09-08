@@ -5,61 +5,60 @@ import json
 
 class OpenAndSerialize:
 
-    def __init__(self, file_name):
-        self.file_name = file_name
-        print("Приняли имя файла:", self.file_name)
-
     def __str__(self):
+        # print("str input file:", input_file)
         return input_file
 
     def serialize(self, value):
-        print("Сериализатор 1, вход:", value)
-        # value = eval(value)
-        print("Сериализатор 1, выход:", value)
+        if type(value) == str:
+            value = eval(value)
+        elif type(value) == dict:
+            value = str(value)
+        # print("Serialized Data:", value)
         return value
 
     def read_file(self):
-        file_json = json.loads(self.serialize(open(str(self), 'r').read()))
-        # contents = self.serialize(file_name)
-        print("Из файла", self, "забираем такой json:", file_json)
-        return file_json
-        file.close()
+        with open(str(self)) as f:
+            data = f.read()
+        print("Taken date:", self.serialize(value=open(str(self), 'r').read()))
+        # print("str.self-------", str(self))
+        js = data
+        print("New Data", js, "... With type:", type(js))
 
     def write_file(self):
-        value = self.serialize(self)
-        file = open(str(self), 'w')
-        print("Запишем в новый файл:", output_file)
-        file.write(str(value))
-        file.close()
-        return value
+        value = self.serialize(value=open(str(self), 'r').read())
+        print("Data to be written:", value)
+        file_object = open(output_file, 'w')
+        # print("Запишем в новый файл:", output_file)
+        file_object.write(str(value))
+        file_object.close()
 
 
 class ExtraSerializeGetName(OpenAndSerialize):
 
     def __str__(self):
-        # value = super().__str__()
+        # print("str input file 22222:", output_file)
         return output_file
 
     def serialize(self, value):
         if type(value) == str:
             value = eval(value)
-        if type(value) == dict:
+        elif type(value) == dict:
             value = str(value)
-        print("Сериализатор2:", value)
-        return value
+        app_json = json.dumps(value)
+        # print("Serialized Data 2:", app_json)
+        return app_json
 
 
-# Задаём имя файла для чтения
+# Задаём имя файла для чтения.
+# В зависимости от наличия в имени text/dict выбираем что на входе.
 input_file = 'input_text.txt'
 output_file = 'output.json'
 
-# obj_get = ExtraSerializeGetName(input_file)
-# obj_get.read_file()
-
-obj_1 = OpenAndSerialize(input_file)
+obj_1 = OpenAndSerialize()
 obj_1.read_file()
-
-obj_2 = ExtraSerializeGetName(output_file)
+obj_1.write_file()
+print('-----------------------------------------------------')
+obj_2 = ExtraSerializeGetName()
+obj_2.read_file()
 obj_2.write_file()
-
-# obj_2.write_file(output_file)

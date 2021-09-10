@@ -39,6 +39,8 @@ smarty.key5 = "data5"
 
 # smarty.my_func()
 print("---------------")
+# for key, value in smarty: print(value) вернёт только value, как и надо.
+# Но как сделать итерацию for value только? Пока не придумалось.
 for key, value in smarty:
     print(value)
 print("---------------")

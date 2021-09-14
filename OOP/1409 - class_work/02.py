@@ -1,6 +1,6 @@
 n = ''
 while n.isdigit() == False:
-    n = input('Enter a number: ')
+    n = str(int(input('Enter a number: ')))
 # n = str(int(input()))
 my_mult = 3
 my_string = ''

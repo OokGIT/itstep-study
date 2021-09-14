@@ -11,9 +11,6 @@ class CacheService(object):
         value[1] += 1
         return value[0]
 
-    def getcount(self, key):
-        return self.data[key][1]
-
 
 cs = CacheService()
 
@@ -22,9 +19,9 @@ n = 1
 while n != 0:
     n = int(input("Enter the Value for n:"))
     if n in cs.data:
-        print("value is in cache:", n, cs[n])
+        print("---------value is in cache:", n, cs[n])
     result = 1
-    for i in range(n, 1, -1):
+    for i in range(1, n + 1):
         result = result * i
         cs[i] = result
     print("factorial of", n, "is", result)

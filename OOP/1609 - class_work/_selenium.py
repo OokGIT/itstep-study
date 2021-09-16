@@ -3,7 +3,8 @@ from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
 # import os
 
-my_pass = 'Riper2807'
+my_pass = open('_my_pass', 'r').readline()
+print(my_pass)
 
 driver = webdriver.Chrome(executable_path="./chromedriver")
 

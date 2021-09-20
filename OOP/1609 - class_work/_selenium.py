@@ -5,14 +5,14 @@ from selenium import webdriver
 
 my_pass = open('_my_pass', 'r').readline()
 phone_number = '0800604439'
+# Токен выдается в CRM с привязкой к IP.
+# Если IP "левый", то после логина может вылезти капча.
 login_url = 'https://online.feeria.ua/cl_refer?oauth_token=2c1c982f45164fddba72cb407b3b9317'
 # agent_url = 'https://online.feeria.ua/edit_agency?oauth_token=2c1c982f45164fddba72cb407b3b9317&'
 
 driver = webdriver.Chrome(executable_path="./chromedriver")
 
 # Логинимся...
-# Токен выдается в CRM с привязкой к IP.
-# Если IP "левый", то после логина может вылезти капча.
 driver.get(login_url)
 element = driver.find_element_by_id('login')
 element.send_keys('aeroua')

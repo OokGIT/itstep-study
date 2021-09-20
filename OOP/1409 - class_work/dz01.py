@@ -2,7 +2,7 @@ n = ''
 while n.isdigit() == False:
     n = str(int(input('Enter a number: ')))
 # n = str(int(input()))
-my_mult = 3
+my_mult = 4
 my_string = ''
 my_result = 0
 for i in range(1, my_mult + 1):

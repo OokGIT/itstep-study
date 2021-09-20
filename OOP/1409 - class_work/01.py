@@ -15,7 +15,7 @@ class CacheService(object):
 cs = CacheService()
 
 # cs[n] = result
-n = 1
+n = 5
 while n != 0:
     n = int(input("Enter the Value for n:"))
     if n in cs.data:

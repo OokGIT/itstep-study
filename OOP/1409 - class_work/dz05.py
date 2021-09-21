@@ -25,4 +25,3 @@ while n != 0:
         result = result * i
         cs[i] = result
     print("factorial of", n, "is", result)
-

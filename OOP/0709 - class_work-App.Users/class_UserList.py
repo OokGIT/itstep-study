@@ -1,6 +1,5 @@
 import random
 
-import xlsxwriter
 from xlsxwriter import Workbook
 
 users_list = [{'user_id': '18456', 'name': 'Артем', 'lastname': 'Данилов',
@@ -123,17 +122,19 @@ class UserList:
                     print('По условию найдена запись:\n', user_item)
 
     def write_to_xlsx(self):
-        with xlsxwriter.Workbook('users.xlsx') as workbook:
-            worksheet = workbook.add_worksheet()
-            first_col = 0
-            user_item = self.my_list[0]
-            print(user_item)
-            worksheet.write(0, 0, 'ID')
-            worksheet.write(0, 1, 'Name')
-            worksheet.write(0, 2, 'Lastname')
-            worksheet.write(0, 3, 'Age')
-            worksheet.write(0, 4, 'City')
-            for i in range(len(self.my_list)):
-                user_item = self.my_list[i]
-                for i, key, value in enumerate(user_item, start=1):
-                    worksheet.write(i, 1, user_item[key])
+        headers_list = ["user_id", "name", "lastname", "age", "city"]
+        wb = Workbook("users.xlsx")
+        ws = wb.add_worksheet("users database")
+
+        first_row = 0
+        for header in headers_list:
+            col = headers_list.index(header)
+            ws.write(first_row, col, header)
+
+        row = 1
+        for dicts in self.my_list:
+            for key, value in dicts.items():
+                col = headers_list.index(key)
+                ws.write(row, col, value)
+            row += 1
+        wb.close()

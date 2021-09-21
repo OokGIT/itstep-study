@@ -33,7 +33,7 @@ class UserList:
         self.my_list.append(dict(new_user))
         self.get_users()
 
-    def change_user(self):
+    def new_item_search(self):
         new_item_search = ''
         new_item = int(input('Выберите значение какого поля мы будем менять'
                              '(цифра от 1 до 5): 1-ID, 2-Имя, 3-Фамилия,'
@@ -52,69 +52,38 @@ class UserList:
             print('Неверный выбор')
         search_value = input(f'Введите искомое значение для'
                              f' выбранного поля {new_item_search}... ')
+        return search_value
+
+    def change_user(self):
+        search_value = self.new_item_search()
         for i in range(len(self.my_list)):
-            self.user_item = self.my_list[i]
-            for key, value in self.user_item.items():
+            user_item = self.my_list[i]
+            for key, value in user_item.items():
                 if value == search_value:
-                    print('По условию найдена запись:\n', self.user_item)
+                    print('По условию найдена запись:\n', user_item)
                     if input('Вносим изменения в данные этого пользователя?'
                              ' y / n') == 'y':
                         new_value = input('Введите новое значение')
-                        self.user_item[key] = new_value
-                        print('Новое значение записи:', self.user_item)
+                        user_item[key] = new_value
+                        print('Новое значение записи:', user_item)
                     else:
                         print('Оставляем запись без изменения')
 
     def del_user(self):
-        new_item_search = ''
-        new_item = int(input('Выберите по какому полю ищем пользователя'
-                             '(цифра от 1 до 5): 1-ID, 2-Имя, 3-Фамилия,'
-                             ' 4-Возраст, 5-Город... '))
-        if new_item == 1:
-            new_item_search = 'user_id'
-        elif new_item == 2:
-            new_item_search = 'name'
-        elif new_item == 3:
-            new_item_search = 'lastname'
-        elif new_item == 4:
-            new_item_search = 'age'
-        elif new_item == 5:
-            new_item_search = 'city'
-        else:
-            print('Неверный выбор')
-        search_value = input(f'Введите искомое значение для'
-                             f' выбранного поля {new_item_search}... ')
+        search_value = self.new_item_search()
         for i in range(len(self.my_list)):
-            self.user_item = self.my_list[i]
-            for key, value in self.user_item.items():
+            user_item = self.my_list[i]
+            for key, value in user_item.items():
                 if value == search_value:
-                    print('По условию найдена запись:\n', self.user_item)
+                    print('По условию найдена запись:\n', user_item)
                     if input('Удаляем данного пользователя ? y / n') == 'y':
-                        # users_list = users_list.remove(user_item)
                         del self.my_list[i]
                         print('New users list:', self.my_list)
                     else:
                         print('Оставляем запись без изменения')
 
     def search_user(self):
-        new_item_search = ''
-        new_item = int(input('Выберите по какому полю ищем пользователя'
-                             '(цифра от 1 до 5): 1-ID, 2-Имя, 3-Фамилия,'
-                             ' 4-Возраст, 5-Город... '))
-        if new_item == 1:
-            new_item_search = 'user_id'
-        elif new_item == 2:
-            new_item_search = 'name'
-        elif new_item == 3:
-            new_item_search = 'lastname'
-        elif new_item == 4:
-            new_item_search = 'age'
-        elif new_item == 5:
-            new_item_search = 'city'
-        else:
-            print('Неверный выбор')
-        search_value = input(f'Введите искомое значение для'
-                             f' выбранного поля {new_item_search}... ')
+        search_value = self.new_item_search()
         for i in range(len(self.my_list)):
             user_item = self.my_list[i]
             for key, value in user_item.items():

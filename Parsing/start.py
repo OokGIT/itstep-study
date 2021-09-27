@@ -2,6 +2,16 @@ import requests
 import bs4
 import csv
 import re
+from mongoengine import *
+connect(host="mongodb://127.0.0.1:27017/feerie_parse")
+
+
+class SitePages(Document):
+    db_title = StringField()
+    db_link = StringField(unique=True)
+    db_price = IntField()
+    db_currency = StringField(max_length=3)
+    db_country = StringField(max_length=64)
 
 
 URL = 'https://feerie.com.ua/ua/all-tours/'
@@ -16,23 +26,28 @@ CLASS_PRICE_BLOCK = 'field field--name-ftf-discount-price-actual field--type-str
 CLASS_ITEM = 'field field--name-node-title field--type-ds field--label-hidden field--item'
 
 # Находим номер последней странички в пагинации
-# response = requests.get(URL)
-# soup = bs4.BeautifulSoup(response.text, 'html.parser')
-# pages_count = int(re.findall('(?<=page\=)\d+', str(soup.find("li", class_=CLASS_PAGER_ITEM)))[0])
-pages_count = 1
+response = requests.get(URL)
+soup = bs4.BeautifulSoup(response.text, 'html.parser')
+pages_count = int(re.findall('(?<=page\=)\d+', str(soup.find("li", class_=CLASS_PAGER_ITEM)))[0])
+# pages_count = 1
 
 def get_html(url, params=None):
     r = requests.get(url, headers=HEADERS, params=params)
     return r
 
 
-def save_csv(items, path):
-    with open(path, 'w', newline='', encoding='utf8') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerow(['Название тура', 'ссылка', 'Цена', 'Валюта', 'Страна'])
-        for item in items:
-            writer.writerow([item['title'], item['link'], item['price'], item['currency'], item['country']])
+# def save_csv(items, path):
+#     with open(path, 'w', newline='', encoding='utf8') as file:
+#         writer = csv.writer(file, delimiter=';')
+#         writer.writerow(['Название тура', 'ссылка', 'Цена', 'Валюта', 'Страна'])
+#         for item in items:
+#             writer.writerow([item['title'], item['link'], item['price'], item['currency'], item['country']])
 
+
+def save_to_db(items):
+    for item in items:
+        if not SitePages.objects(db_link=item['link']):
+            SitePages(db_title=item['title'], db_link=item['link'], db_price=item['price'], db_currency=item['currency'], db_country=item['country']).save()
 
 def get_content(html):
     soup = bs4.BeautifulSoup(html, 'html.parser')
@@ -57,9 +72,14 @@ def parse():
             print('Парсинг страницы', page + 1)
             html = get_html(URL, params={'page': page})
             tours.extend(get_content(html.text))
-            save_csv(tours, EXPORT_CSV)
+            # save_csv(tours, EXPORT_CSV)
+            save_to_db(tours)
         # get_content(html.text)
-        print('Готово, результаты записаны в файл', EXPORT_CSV)
+        # print('Готово, результаты записаны в файл', EXPORT_CSV)
+        print('Готово, результаты записаны в базу данных')
     else:
         print('Error on page, not 200 response')
 parse()
+
+# for page in SitePages.objects:
+#     print(page.db_link)

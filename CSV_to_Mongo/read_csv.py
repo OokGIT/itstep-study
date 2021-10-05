@@ -1,8 +1,7 @@
 import csv
 import re
 from dateutil.parser import parse
-from mongoengine import *
-connect(host="mongodb://127.0.0.1:27017/csv_to_mongo")
+from _models import WriteToDb
 
 # def parse_date_convert(date, fmt=None):
 #     if fmt is None:
@@ -10,16 +9,7 @@ connect(host="mongodb://127.0.0.1:27017/csv_to_mongo")
 #     get_date_obj = parse(str(date))
 #     return str(get_date_obj.strftime(fmt))
 
-class WriteToDb(Document):
-    url = StringField(required=True, primary_key=True)
-    intern_id = StringField(max_length=12)
-    title = StringField()
-    description = StringField()
-    published_at_utc = DateTimeField()
 
-
-    def __str__(self):
-        return self.url
 
 
 with open('inbound.csv', 'r', encoding='utf-8-sig') as f:

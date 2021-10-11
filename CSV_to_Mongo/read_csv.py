@@ -13,6 +13,7 @@ with open(CSV_FILE, 'r', encoding=CSV_ENCODING) as f:
         for line in read_csv:
             if WriteToDb.objects.filter(url=line[4]):
                 print('Item already in DB. Duplicates will not be written')
+                continue
             elif not line[4].startswith('http'):
                 print('Seems there is not http/https address found. String will not be written to DB')
                 continue

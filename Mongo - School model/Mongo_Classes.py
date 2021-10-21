@@ -3,7 +3,7 @@ connect(host="mongodb://127.0.0.1:27017/Schools")
 
 
 class Schools(Document):
-    school_number = StringField(required=True, max_length=4, primary_key=True)
+    school_number = StringField(required=True, max_length=4)
     school_name = StringField(max_length=128)
     school_city = StringField(max_length=64)
     school_address = StringField(max_length=128)

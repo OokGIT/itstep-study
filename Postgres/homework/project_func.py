@@ -20,6 +20,15 @@ MODEL   TEXT    NOT NULL,
 PRICE   REAL);'''
     cursor.execute(create_table_query)
     conn.commit()
-    print("Создана таблица")
+    print("Создана таблица", tb_name)
 
 
+def fill_data(table_name, mobile_id, mobile_model, mobile_price):
+    insert_query = f''' INSERT INTO {table_name} (ID, MODEL, PRICE) VALUES ({mobile_id}, '{mobile_model}', {mobile_price})'''
+    # insert_query = ''' INSERT INTO phones07 (ID, MODEL, PRICE) VALUES (1, 'huaweii', 10000)'''
+    cursor.execute(insert_query)
+    conn.commit()
+    print("Запись создана")
+    cursor.execute(f"SELECT * from {table_name}")
+    record = cursor.fetchall()
+    print("Результат:", record)

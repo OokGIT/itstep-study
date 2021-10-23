@@ -1,5 +1,0 @@
-READ_FILE = '231021-postgres.xls'
-dbuser = 'postgres'
-dbpass = 'postgres'
-dbhost = 'localhost'
-dbname = 'xls-to-psql'

@@ -29,7 +29,7 @@ import models
 # cursor.execute(f'''INSERT INTO users (username, age) VALUES ('mark', '24')''')
 # con.commit()
 
-## Testing (тут проверили, что при удалении поста удаляется запись в таблице many-to-many:
+# Testing (тут проверили, что при удалении поста удаляется запись в таблице many-to-many:
 del_post = 1
 del_query = f'''DELETE FROM posts WHERE post_id = {del_post}'''
 models.cursor.execute(del_query)

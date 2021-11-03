@@ -8,3 +8,5 @@
 /Postgres/homework311021/config.py
 /Telegram/Telegram_mongo_parsing/conf.py
 .idea/
+/Telegram/Telegram_mongo_parsing/wiki_search.log
+/Telegram/Telegram_mongo_parsing/temp.py

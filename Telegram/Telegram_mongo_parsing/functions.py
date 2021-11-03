@@ -8,20 +8,22 @@ db = client[conf.DB_NAME]
 wikipedia.set_lang(conf.WIKI_LANGUAGE)
 
 
+# запрос через модуль wikipedia заголовка статьи по отправленному пользователем тексту
 def wiki_search_summary(message):
     result = wikipedia.summary(f'{message}')
-    print(result)
+    # print(result)
     return result
 
 
+# все запросы пользователя сразу кладём в бд и помечаем, что по ним ещё нет ответа wiki (state: None)
 def store_message_to_db(message):
     store_message = {
-            'user_id': message.from_user.id,
-            'message_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            'user_message': message.text,
-            'response': "",
-            'state': None
-        }
+          'user_id': message.from_user.id,
+          'message_time': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+          'user_message': message.text,
+          'response': "",
+          'state': None
+          }
     db.messages.insert_one(store_message)
     return None
 
@@ -38,18 +40,17 @@ def db_update(message):
             # print(user)
             db.messages.update_one({'_id': doc['_id']}, {'$set': {"state": True}})
             db.messages.update_one({'_id': doc['_id']}, {'$set': {"response": response}})
-            print('new_item')
-    return response
-
-# print(db_update('Порошенко'))
-
-
-def search_in_db(message, user_id):
-    response = None
-    print(message)
-    print(user_id)
-    for doc in db.messages.find():
-        if doc['user_message'] == message and doc['user_id'] == user_id and doc['state'] is True:
+        elif doc['state'] is True and doc['user_message'] == message:
             response = doc['response']
-    print(response)
     return response
+
+
+# def search_in_db(message, user_id):
+#     response = None
+#     print(message)
+#     print(user_id)
+#     for doc in db.messages.find():
+#         if doc['user_message'] == message and doc['user_id'] == user_id and doc['state'] is True:
+#             response = doc['response']
+#     print(response)
+#     return response

@@ -10,3 +10,4 @@
 .idea/
 /Telegram/Telegram_mongo_parsing/wiki_search.log
 /Telegram/Telegram_mongo_parsing/temp.py
+/Telegram/Telegram_mongo_parsing/conf.py

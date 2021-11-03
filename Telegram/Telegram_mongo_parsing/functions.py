@@ -39,10 +39,17 @@ def db_update(message):
             db.messages.update_one({'_id': doc['_id']}, {'$set': {"state": True}})
             db.messages.update_one({'_id': doc['_id']}, {'$set': {"response": response}})
             print('new_item')
-        elif doc['user_message'] == message and doc['state'] is True:
-            response = doc['response']
-            print('exist')
-
     return response
 
-print(db_update('Порошенко'))
+# print(db_update('Порошенко'))
+
+
+def search_in_db(message, user_id):
+    response = None
+    print(message)
+    print(user_id)
+    for doc in db.messages.find():
+        if doc['user_message'] == message and doc['user_id'] == user_id and doc['state'] is True:
+            response = doc['response']
+    print(response)
+    return response

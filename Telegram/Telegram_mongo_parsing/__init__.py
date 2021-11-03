@@ -20,8 +20,8 @@ def catch_all(message):
     log_file.write(log_string)
     log_file.close()
     functions.store_message_to_db(message)
-    # bot.send_message(functions.db_filter(message), functions.wiki_search_summary(message))
-    bot.send_message(116257355, f'{functions.db_update(message)}')
+    bot.send_message(message.chat.id, functions.db_update(message.text))
+    # bot.send_message(message.chat.id, functions.search_in_db(message.text, message.chat.id))
     print(message.text)
 
     # bot.reply_to(message, f'{store_message_to_db(message)}')

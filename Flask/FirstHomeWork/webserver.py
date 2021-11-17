@@ -12,7 +12,12 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/home')
 def index():
-    return render_template('index.html', name='Процессоры')
+    res = [
+        {'name': 'Intel Core i5-10400', 'freq': '2.9GHz', 'cache': '12MB', 'price': '5359'},
+        {'name': 'Intel Core i7-11700K', 'freq': '3.6Hz', 'cache': '16MB', 'price': '12011'},
+        {'name': 'Intel Core i5-10400F', 'freq': '2.9GHz', 'cache': '12MB', 'price': '4799'},
+    ]
+    return render_template('index.html', name='Процессоры', result=res)
 
 
 @app.route('/about')

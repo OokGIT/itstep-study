@@ -15,3 +15,8 @@ def index_page():
     # ]
     print(res)
     return render_template('index.html', name='Процессоры', result=res)
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')

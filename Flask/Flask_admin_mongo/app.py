@@ -17,6 +17,6 @@ admin = Admin(
     template_mode='bootstrap3',
 )
 
-import core.views
+import api.views
 import rest_api.admin
-import rest_api.models
+# import rest_api.views

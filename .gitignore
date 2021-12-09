@@ -13,3 +13,4 @@
 /Telegram/Telegram_mongo_parsing/conf.py
 /Threads/chat/config.py
 /requirements.txt
+/django/01test/my_proj/.env

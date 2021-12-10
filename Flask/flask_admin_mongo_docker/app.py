@@ -1,4 +1,3 @@
-import sys
 from flask import Flask
 from flask_admin import Admin
 from flask_mongoengine import MongoEngine
@@ -18,6 +17,4 @@ admin = Admin(
     template_mode='bootstrap3',
 )
 
-import api.views
-import rest_api.admin
 # import rest_api.views

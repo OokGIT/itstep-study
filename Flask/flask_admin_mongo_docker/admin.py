@@ -1,7 +1,7 @@
 from flask_admin.contrib.mongoengine import ModelView
 from flask_admin.contrib.mongoengine.filters import FilterLike, FilterGreater, FilterSmaller
 from models import CPU
-from ..app import admin
+from Flask.flask_admin_mongo_docker.app import admin
 
 
 # Переопределяем модели в админке

@@ -1,5 +1,5 @@
 # from datetime import datetime
-from ..app import db
+from Flask.flask_admin_mongo_docker.app import db
 
 
 class CPU(db.Document):

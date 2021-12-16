@@ -1,22 +1,4 @@
-from flask import Flask
-from flask_admin import Admin
-from flask_mongoengine import MongoEngine
+from views import app
 
-
-# app config
-app = Flask(__name__)
-app.config.from_pyfile('settings.py')
-
-# DB config
-db = MongoEngine(app)
-
-# Flask Admin config
-admin = Admin(
-    app,
-    name='TEST',
-    template_mode='bootstrap3',
-)
-
-import core.views
-import rest_api.admin
-import rest_api.models
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0')

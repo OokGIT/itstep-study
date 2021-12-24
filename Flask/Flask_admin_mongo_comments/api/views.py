@@ -15,7 +15,7 @@ def index_page():
     #     {'name': 'Intel Core i9-12900K', 'freq': '3.2GHz', 'cache': '30MB', 'price': '21299'},
     #     {'name': 'AMD Ryzen 5 5600X', 'freq': '3.7GHz', 'cache': '32MB', 'price': '9365'},
     # ]
-    print(res)
+    # print(res)
     return render_template('index.html', name='Процессоры', result=res)
 
 
@@ -95,8 +95,8 @@ def view_get_item():
     # print(query_params)
     items = CPU.objects.filter(**filter_query)
     data = serializer(items)
-    return jsonify(data), 200
-    # return render_template('item.html')
+    # return jsonify(data), 200
+    return render_template('item.html')
 
 
 @app.route('/vendor')

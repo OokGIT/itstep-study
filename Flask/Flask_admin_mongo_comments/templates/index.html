@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <h1 class="display-4 fw-normal">{{ name }}</h1>
+            <p class="fs-5 text-muted">У нас тут собраны самые крутые процессоры и главное - недорого!</p>
+        </div>
+    </header>
+<div class="row row-cols-3 row-cols-md-3 mb-3 text-center">
+        {% for i in result %}
+              <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{ i.vendor }} {{ i.name }}</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ i.price }}<small class="text-muted fw-light"> грн</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>частота: {{ i.freq }}GHz</li>
+                      <li>кеш: {{ i.cache }}MB</li>
+                        <p>
+                        {% for tag in i.tags %}
+                            <small class="text-muted fw-light"><em>- {{tag.name}}</small></em><br>
+                        {% endfor %}
+                        </p>
+                    </ul>
+                    <button type="button" onclick="window.location='/item?item={{i._id}}';" class="w-100 btn btn-lg btn-outline-primary">Подробнее</button>
+                  </div>
+                </div>
+              </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

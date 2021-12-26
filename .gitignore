@@ -14,3 +14,4 @@
 /Threads/chat/config.py
 /requirements.txt
 /django/01test/my_proj/.env
+/django/my_01/.env

@@ -112,8 +112,8 @@ def view_get_item():
     # print(query_params)
     items = CPU.objects.filter(**filter_query)
     data = serializer(items)
-    json_out = jsonify(data), 200
-    return render_template('item.html', name='Процессор', result=json_out)
+    json_out = jsonify(data)
+    return render_template('item.html', name='Процессор', result=data)
 
 
 @app.route('/vendor')

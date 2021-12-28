@@ -15,3 +15,4 @@
 /requirements.txt
 /django/01test/my_proj/.env
 /django/my_01/.env
+/django/my_02_swagger/.env

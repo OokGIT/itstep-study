@@ -39,3 +39,11 @@ class CPU(db.Document):
 
         return self.tags
 
+    @property
+    def get_tags(self):
+        str_ = ""
+        for i in self.tags:
+            str_ += f"-{i.name}  "
+        return str_
+
+

@@ -87,6 +87,18 @@ def serializer(models_objs):
     return list_data
 
 
+# @app.route('/item_id')
+# def
+
+
+@app.route('/item/<item_id>')
+def get_item_by_id(item_id):
+    print(item_id)
+    item = CPU.objects.get(id=item_id)
+    print(item.name)
+    return render_template('item.html', item=item)
+
+
 @app.route('/item')
 @decorator_check
 def view_get_item():

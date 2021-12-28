@@ -28,12 +28,13 @@
                       <li>частота: {{ i.freq }}GHz</li>
                       <li>кеш: {{ i.cache }}MB</li>
                         <p>
-                        {% for tag in i.tags %}
-                            <small class="text-muted fw-light"><em>- {{tag.name}}</small></em><br>
-                        {% endfor %}
+<!--                        {% for tag in i.tags %}-->
+<!--                            <small class="text-muted fw-light"><em>- {{tag.name}}</small></em><br>-->
+<!--                        {% endfor %}-->
+                            <small class="text-muted fw-light"><em>{{i.get_tags}}</small></em>
                         </p>
                     </ul>
-                    <button type="button" onclick="window.location='/item?name={{i.name}}';" class="w-100 btn btn-lg btn-outline-primary">Подробнее</button>
+                    <button type="button" onclick="window.location='/item/{{i.id}}';" class="w-100 btn btn-lg btn-outline-primary">Подробнее</button>
                   </div>
                 </div>
               </div>
@@ -41,4 +42,7 @@
 
     </div>
 </div>
+<!--<script>-->
+<!--    console.log('asd')-->
+<!--</script>-->
 {% endblock %}

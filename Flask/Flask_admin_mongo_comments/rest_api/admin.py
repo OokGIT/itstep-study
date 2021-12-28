@@ -1,8 +1,19 @@
 from flask_admin.contrib.mongoengine import ModelView
 from flask_admin.contrib.mongoengine.filters import FilterLike, FilterGreater, FilterSmaller
+# from flask_admin import AdminIndexView, expose
+# from werkzeug.utils import redirect
 from app import admin
 from rest_api.models import CPU, Tag, Vendor
 
+
+# class IndexView(AdminIndexView):
+#
+#     def is_visible(self):
+#         return False
+#
+#     @expose('/')
+#     def index(self):
+#         return redirect('/admin/cpu')
 
 
 # Переопределяем модели в админке
@@ -29,3 +40,4 @@ class VendorModelView(ModelView):
 admin.add_view(CpuModelView(CPU))
 admin.add_view(TagModelView(Tag))
 admin.add_view(VendorModelView(Vendor))
+# admin.add_view(IndexView(AdminIndexView))

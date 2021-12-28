@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}
-О нас
-{% endblock %}
-
 {% block body %}
 <div class="container">
-    {% for item in items %}
-        <h1>{{result}}</h1>
-    {% endfor %}
+                <div class="card mb-4 rounded-3 shadow-sm">
+                  <div class="card-header py-3">
+                    <h4 class="my-0 fw-normal">{{ item.vendor }} {{ item.name }}</h4>
+                  </div>
+                  <div class="card-body">
+                    <h1 class="card-title pricing-card-title">{{ item.price }}<small class="text-muted fw-light"> грн</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>частота: {{ item.freq }}GHz</li>
+                      <li>кеш: {{ item.cache }}MB</li>
+                        <small class="text-muted fw-light"><em>{{item.get_tags}}</small></em>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
 </div>
+<script>
+    console.log('input..')
+</script>
 {% endblock %}
+

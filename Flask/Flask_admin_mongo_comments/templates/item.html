@@ -1,9 +1,61 @@
 {% extends 'base.html' %}
 
+{% block title %}
+    {{ item.vendor }} {{ item.name }}
+{% endblock %}
+
 {% block body %}
 <div class="container">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+     let id_item = "{{item.id}}"
+<!--        console.log(id_item)-->
+
+        $(function(){
+            // Функция для получения комментов
+            var func_get_comments = function () {
+                $.get(`http://localhost:5000/get_comments/${id_item}`, function (data) {
+                    console.log(data)
+                    let html = ""
+                    if (data.length) {
+                        data.forEach(element => {
+
+                        console.log(element)
+                        html += `
+                        <div style="border: solid;">
+                            <p>${element.date_created}</p>
+                            <p>${element.text}</p>
+                        </div>`
+                    })
+                    }else{
+                        html = `<p> NONE </p>`
+                    }
+
+                    $('#comments').html(html)
+                })
+            }
+            func_get_comments()
+            // Для отправки используем пост
+            var func = function () {
+                var text = $('#comment').val()
+                $.ajax({
+                    type: "POST",
+                    url: `http://localhost:5000/send_comment/${id_item}`,
+                    contentType : 'application/json',
+                    async: false,
+                    // Сериализация данных чтобы можно было без проблем прочитать на стороне flask
+                    data: JSON.stringify({text:text}),
+                    success: function (data) {
+                        func_get_comments()
+                    }
+                })
+            }
+            $('#send').on('click', func);
+        })
+</script>
                 <div class="card mb-4 rounded-3 shadow-sm">
                   <div class="card-header py-3">
+                      <img src="{{ item.path_img }}" width="240" height="240"/>
                     <h4 class="my-0 fw-normal">{{ item.vendor }} {{ item.name }}</h4>
                   </div>
                   <div class="card-body">
@@ -13,13 +65,12 @@
                       <li>кеш: {{ item.cache }}MB</li>
                         <small class="text-muted fw-light"><em>{{item.get_tags}}</small></em>
                     </ul>
+                      {{html}}
                   </div>
                 </div>
               </div>
 
 </div>
-<script>
-    console.log('input..')
-</script>
+
 {% endblock %}
 

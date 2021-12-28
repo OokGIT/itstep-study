@@ -3,7 +3,12 @@ from flask_admin.contrib.mongoengine.filters import FilterLike, FilterGreater, F
 # from flask_admin import AdminIndexView, expose
 # from werkzeug.utils import redirect
 from app import admin
-from rest_api.models import CPU, Tag, Vendor
+from rest_api.models import (
+    CPU,
+    Tag,
+    Vendor,
+    Comment
+)
 
 
 # class IndexView(AdminIndexView):
@@ -37,7 +42,14 @@ class VendorModelView(ModelView):
     )
 
 
+class CommentModelView(ModelView):
+    column_filters = (
+        FilterLike(Comment.text, 'text'),
+    )
+
+
 admin.add_view(CpuModelView(CPU))
 admin.add_view(TagModelView(Tag))
 admin.add_view(VendorModelView(Vendor))
+admin.add_view(CommentModelView(Comment))
 # admin.add_view(IndexView(AdminIndexView))

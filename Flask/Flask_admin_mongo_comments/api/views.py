@@ -1,7 +1,7 @@
 import mongoengine.base.datastructures
-from flask import render_template, Response, request, jsonify
+from flask import render_template, Response, request, jsonify, send_from_directory
 from mongoengine.base import BaseList
-from rest_api.models import CPU, Vendor
+from rest_api.models import CPU, Vendor, Comment
 from app import app
 
 
@@ -99,6 +99,11 @@ def get_item_by_id(item_id):
     return render_template('item.html', item=item)
 
 
+@app.route('/item/img/<file>')
+def static_file_img(file):
+    return send_from_directory('templates/img/', file)
+
+
 @app.route('/item')
 @decorator_check
 def view_get_item():
@@ -119,4 +124,11 @@ def view_get_vendor():
     # print(query_params)
     vendor = Vendor.objects.filter(**filter_query)
     data = serializer(vendor)
+    return jsonify(data), 200
+
+
+@app.route('/get_comments/<id_item>')
+def get_comments(id_item):
+    comment = Comment.objects.filter(item=id_item)
+    data = serializer(comment)
     return jsonify(data), 200

@@ -1,5 +1,6 @@
-# from datetime import datetime
+from datetime import datetime
 from app import db
+from mongoengine import DateTimeField
 
 
 class Vendor(db.Document):
@@ -23,6 +24,7 @@ class CPU(db.Document):
     cache = db.StringField()
     vendor = db.ReferenceField(Vendor)
     tags = db.ListField(db.ReferenceField(Tag))
+    path_img = db.StringField()
     # created_date_time = db.DateTimeField(default=datetime.now)
 
     def __str__(self):
@@ -47,3 +49,10 @@ class CPU(db.Document):
         return str_
 
 
+class Comment(db.Document):
+    text = db.StringField()
+    item = db.ReferenceField(CPU)
+    date_created = db.DateTimeField(default=datetime.now())
+
+    def __str__(self):
+        return f"{self.text}"

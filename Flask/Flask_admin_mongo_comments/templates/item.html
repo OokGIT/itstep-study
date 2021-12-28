@@ -15,12 +15,12 @@
             // Функция для получения комментов
             var func_get_comments = function () {
                 $.get(`http://localhost:5000/get_comments/${id_item}`, function (data) {
-                    console.log(data)
+<!--                    console.log(data)-->
                     let html = ""
                     if (data.length) {
                         data.forEach(element => {
 
-                        console.log(element)
+<!--                        console.log(element)-->
                         html += `
                         <div style="border: solid;">
                             <p>${element.date_created}</p>
@@ -28,7 +28,7 @@
                         </div>`
                     })
                     }else{
-                        html = `<p> NONE </p>`
+                        html = `<p> Комментариев пока нет </p>`
                     }
 
                     $('#comments').html(html)
@@ -57,7 +57,7 @@
 </script>
                 <div class="card mb-4 rounded-3 shadow-sm">
                   <div class="card-header py-3">
-                      <img src="{{ item.path_img }}" width="240" height="240"/>
+                      <img src="img/{{ item.path_img }}" width="240" height="240"/>
                     <h4 class="my-0 fw-normal">{{ item.vendor }} {{ item.name }}</h4>
                   </div>
                   <div class="card-body">

@@ -132,3 +132,12 @@ def get_comments(id_item):
     comment = Comment.objects.filter(item=id_item)
     data = serializer(comment)
     return jsonify(data), 200
+
+
+@app.route('/send_comment/<id_item>', methods=['POST'])
+def save_comments(id_item):
+    data_to_save = request.json
+    data_to_save['item'] = id_item
+    comment = Comment(**data_to_save)
+    comment.save()
+    return jsonify({}), 200

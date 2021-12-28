@@ -35,9 +35,11 @@
                 })
             }
             func_get_comments()
+
             // Для отправки используем пост
             var func = function () {
                 var text = $('#comment').val()
+<!--                console.log(text)-->
                 $.ajax({
                     type: "POST",
                     url: `http://localhost:5000/send_comment/${id_item}`,
@@ -65,7 +67,15 @@
                       <li>кеш: {{ item.cache }}MB</li>
                         <small class="text-muted fw-light"><em>{{item.get_tags}}</small></em>
                     </ul>
-                      {{html}}
+                      <div id="comments"> </div>
+        <div style="padding-left: 5px; padding-top: 5px;">
+            <textarea id="comment" style="min-height: 55px; max-height: 55px; min-width: 250px; max-width: 250px;">
+            </textarea>
+            <!--   для создания комментов     -->
+            <button id="send">
+                Отправить комментарий
+            </button>
+        </div>
                   </div>
                 </div>
               </div>
